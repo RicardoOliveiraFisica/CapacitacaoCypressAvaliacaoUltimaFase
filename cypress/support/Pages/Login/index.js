@@ -1,10 +1,13 @@
 const el = require('./elements').ELEMENTS
 class Login {
 
-    acessarURL(url){
-        cy.visit(url)
-      //  cy.get(el.botaoLogin).should('be.visible')
+    acessarLogin(){
+        cy.visit('/login')
     }
+
+    verificarPaginaLogin(){
+        cy.verificarPagina('automationexercise')
+    }  
 
     preenherEmail(email){
         cy.get(el.email).type(email)

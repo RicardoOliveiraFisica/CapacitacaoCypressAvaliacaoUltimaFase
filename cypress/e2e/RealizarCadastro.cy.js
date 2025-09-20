@@ -11,12 +11,12 @@ describe('Realizar Cadastro', function(){
     })
 
     beforeEach(function(){
-          cy.fixture('credenciaisFixture').then((dados)=>{
-               this.credenciaisExt = dados
-          })
+        cy.fixture('credenciaisFixture').then((dados)=>{
+            this.credenciaisExt = dados
+        })
           
-          Login.acessarURL('/login')
-          cy.url().should('include', 'automationexercise')
+          Login.acessarLogin()
+        cy.url().should('include', 'automationexercise')
     })
 
     it("Realizar Cadastro com sucesso", function(){

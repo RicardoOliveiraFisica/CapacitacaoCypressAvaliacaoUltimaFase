@@ -14,12 +14,12 @@ describe('Realizar Compra', function(){
     })
 
     before(function(){
-            cy.fixture('credenciaisFixture').then((dados)=>{
-                  this.credenciaisExt = dados
-            })
+        cy.fixture('credenciaisFixture').then((dados)=>{
+                this.credenciaisExt = dados
+        })
             
-            Login.acessarURL('/login')
-            cy.url().should('include', 'automationexercise')
+        Login.acessarLogin()
+        cy.url().should('include', 'automationexercise')
 
     }) 
 
@@ -30,23 +30,23 @@ describe('Realizar Compra', function(){
 
 
     it("Realizar Compra com sucesso", function(){
-            CategoryProducts.selecionarCategoriaAleatoria()
-            CategoryProducts.clicarNoProdutoAleatorio()
-            CategoryProducts.verificarProdutoAdicionadoAoCarrinhoSucesso()
-            ViewCart.verificarCarrinhoSucesso()
-            ViewCart.clicarEmCheckout()
-            Checkout.verificarCheckoutSucesso()
-            Checkout.verificarCarrinhoNaoVazio()
-            Checkout.clicarEmCheckout()
-            Payment.preencherInfoCard(
-                  this.credenciaisExt.payment.card_name,
-                  this.credenciaisExt.payment.card_number,
-                  this.credenciaisExt.payment.card_cvv,
-                  this.credenciaisExt.payment.card_expiration_month,
-                  this.credenciaisExt.payment.card_expiration_year
-            )
-            Payment.clicarEmPagarEConfirmar()
-            Payment.verificarPagamentoSucesso()
+        CategoryProducts.selecionarCategoriaAleatoria()
+        CategoryProducts.clicarNoProdutoAleatorio()
+        CategoryProducts.verificarProdutoAdicionadoAoCarrinhoSucesso()
+        ViewCart.verificarCarrinhoSucesso()
+        ViewCart.clicarEmCheckout()
+        Checkout.verificarCheckoutSucesso()
+        Checkout.verificarCarrinhoNaoVazio()
+        Checkout.clicarEmCheckout()
+        Payment.preencherInfoCard(
+                this.credenciaisExt.payment.card_name,
+                this.credenciaisExt.payment.card_number,
+                this.credenciaisExt.payment.card_cvv,
+                this.credenciaisExt.payment.card_expiration_month,
+                this.credenciaisExt.payment.card_expiration_year
+        )
+        Payment.clicarEmPagarEConfirmar()
+        Payment.verificarPagamentoSucesso()
     })
 
 })

@@ -1,5 +1,5 @@
 {
-  "name": "capacitacaocypressavaliacao",
+  "name": "capacitacaocypressavaliacaoultimafase",
   "version": "1.0.0",
   "description": "Treinamento de Cypress",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RicardoOliveiraFisica/CapacitacaoCypressAvaliacao"
+    "url": "git+https://github.com/RicardoOliveiraFisica/CapacitacaoCypressAvaliacaoUltimaFase"
   },
   "author": "Ricardo",
   "license": "ISC",

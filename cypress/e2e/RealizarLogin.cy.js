@@ -1,38 +1,33 @@
 /// <reference types='cypress' />
 //import { before } from 'mocha'
 import Login from '../support/Pages/Login'
-import Home from '../support/Pages/Home'
 
 describe('Realizar Login', function(){
-    
-    before(function(){
-          
-    })
 
     beforeEach(function(){
         cy.fixture('credenciaisFixture').then((dados)=>{
                this.credenciaisExt = dados
         })
 
-        Login.acessarURL('/login')
+        Login.acessarLogin()
         cy.url().should('include', 'automationexercise')
     })
 
     afterEach(function(){
-          Home.clicarEmLogoutSeLogado()
+        cy.realizarLogout()
     })
 
     it("Realizar Login com sucesso", function(){
-        Login.preenherEmail(this.credenciaisExt.email.email_valido)
-        Login.preencherPassword(this.credenciaisExt.passwords.password_valido)
-        Login.clicarEmLogin()
+        cy.realizarLogin(this.credenciaisExt.email.email_valido,
+                         this.credenciaisExt.passwords.password_valido)            
         Login.verificarLoginSucesso()
+        
+
     })
     
     it("Realizar Login com falha", function(){
-        Login.preenherEmail(this.credenciaisExt.email.email_invalido)
-        Login.preencherPassword(this.credenciaisExt.passwords.password_invalido)
-        Login.clicarEmLogin()
+        cy.realizarLogin(this.credenciaisExt.email.email_invalido,
+                         this.credenciaisExt.passwords.password_invalido)
         Login.verificarLoginFalha()
     })
     

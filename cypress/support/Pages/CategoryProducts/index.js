@@ -34,5 +34,9 @@ class CategoryProducts {
         cy.get(el.showCart).should('be.visible').click()
     }
 
+    clicarEmContinuarComprando() {
+        cy.get(el.continueShopping).should('be.visible').click()
+    }
+
 }
 export default new CategoryProducts()

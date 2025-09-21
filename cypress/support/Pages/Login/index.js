@@ -2,7 +2,7 @@ const el = require('./elements').ELEMENTS
 class Login {
 
     acessarLogin(){
-        cy.visit('/login')
+        cy.visit('/login',{ timeout: 7000 })
     }
 
     verificarPaginaLogin(){

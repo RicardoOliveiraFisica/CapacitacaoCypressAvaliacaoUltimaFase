@@ -20,8 +20,8 @@ describe('Carregar e Esvaziar carrinho', function(){
         Home.acessarHome()
         Home.verificarSeLogado().then((logado) => {
                 if (!logado) {                         
-                    cy.realizarLogin(this.credenciaisExt.email.email_valido,
-                                     this.credenciaisExt.passwords.password_valido)
+                    cy.realizarLogin(Cypress.env('user_email'),
+                                     Cypress.env('user_senha'),{log:false})
                 }
         })           
 

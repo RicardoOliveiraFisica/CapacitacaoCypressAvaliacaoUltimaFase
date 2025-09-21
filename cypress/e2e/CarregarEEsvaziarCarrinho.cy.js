@@ -19,18 +19,16 @@ describe('Carregar e Esvaziar carrinho', function(){
         
         Home.acessarHome()
         Home.verificarSeLogado().then((logado) => {
-                if (!logado) {      
-                        Login.acessarLogin()
-                        cy.url().should('include', 'automationexercise')                          
-                        cy.realizarLogin(this.credenciaisExt.email.email_valido,
-                                this.credenciaisExt.passwords.password_valido)
+                if (!logado) {                         
+                    cy.realizarLogin(this.credenciaisExt.email.email_valido,
+                                     this.credenciaisExt.passwords.password_valido)
                 }
         })           
 
               
     })
     
-    for (let item=1; item<5; item++){
+    for (let item=1; item<=10; item++){
         it(`Inserir item nº "${item}"`, function(){    
                 CategoryProducts.selecionarCategoriaAleatoria()
                 CategoryProducts.clicarNoProdutoAleatorio()

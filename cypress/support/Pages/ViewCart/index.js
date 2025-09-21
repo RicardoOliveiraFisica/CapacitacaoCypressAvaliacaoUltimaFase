@@ -6,7 +6,7 @@ class ViewCart {
     }
 
     clicarEmCheckout(){
-        cy.get(el.checkout).should('be.visible').click()
+        cy.get(el.checkout,{ timeout: 3000 }).should('be.visible').click()
     }
 
 }

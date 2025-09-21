@@ -10,13 +10,13 @@ class Payment {
     }
     
     clicarEmPagarEConfirmar(){
-        cy.get(el.payButton).should('be.visible').click()
+        cy.get(el.payButton,{ timeout: 3000 }).should('be.visible').click()
     }
 
     verificarPagamentoSucesso() {
-        cy.get(el.paymentSuccess).should('be.visible').should('have.text', 'Order Placed!')
+        cy.get(el.paymentSuccess,{ timeout: 3000 }).should('be.visible').should('have.text', 'Order Placed!')
         cy.url().should('include', '/payment_done')
-        cy.get(el.buttonContinue).should('be.visible').click()
+        cy.get(el.buttonContinue,{ timeout: 3000 }).should('be.visible').click()
     }
 
 }

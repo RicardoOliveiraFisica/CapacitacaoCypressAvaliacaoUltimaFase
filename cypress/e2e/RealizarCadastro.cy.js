@@ -15,8 +15,7 @@ describe('Realizar Cadastro', function(){
             this.credenciaisExt = dados
         })
           
-          Login.acessarLogin()
-        cy.url().should('include', 'automationexercise')
+        Login.acessarLogin()
     })
 
     it("Realizar Cadastro com sucesso", function(){

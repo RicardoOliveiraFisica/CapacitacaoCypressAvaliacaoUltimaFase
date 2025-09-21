@@ -3,11 +3,8 @@ class Login {
 
     acessarLogin(){
         cy.visit('/login',{ timeout: 10000 })
+        cy.url().should('include', 'automationexercise')
     }
-
-    verificarPaginaLogin(){
-        cy.verificarPagina('automationexercise')
-    }  
 
     preenherEmail(email){
         cy.get(el.email).type(email)

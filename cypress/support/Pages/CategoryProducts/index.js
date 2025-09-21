@@ -31,19 +31,19 @@ class CategoryProducts {
     }
 
     verificarProdutoAdicionadoAoCarrinhoSucesso() {
-        cy.get(el.showCart).should('be.visible').click()
+        cy.get(el.showCart,{ timeout: 3000 }).should('be.visible').click()
     }
 
     clicarEmContinuarComprando() {
-        cy.get(el.continueShopping).should('be.visible').click()
+        cy.get(el.continueShopping,{ timeout: 3000 }).should('be.visible').click()
     }
 
     clicarEmVerCarrinho() {
-        cy.get(el.viewCart).should('be.visible').click()
+        cy.get(el.viewCart,{ timeout: 3000 }).should('be.visible').click()
     }
 
     esvaziarCarrinho() {
-        cy.get(el.esvaziarCarrinho).then($itens => {
+        cy.get(el.esvaziarCarrinho,{ timeout: 5000 }).then($itens => {
             if ($itens.length > 0) {
                 cy.wrap($itens).each(($el) => {
                     cy.wrap($el).find('a').click()
@@ -56,7 +56,7 @@ class CategoryProducts {
     }
 
     carrinhoEsvaziadoComSucesso() {
-        cy.get('p').should('contain.text', 'Cart is empty!')
+        cy.get('p',{ timeout: 5000 }).should('contain.text', 'Cart is empty!')
     }
 
 }

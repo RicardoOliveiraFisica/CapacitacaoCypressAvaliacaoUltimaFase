@@ -8,11 +8,11 @@ class Home {
     verificarSeLogado() {
         return cy.get('body').then($body => {
             if ($body.find(el.msgLoginSucesso).length > 0) {
-            cy.log('Usuário já está logado');
-            return true;
+                cy.log('Usuário já está logado');
+                return true;
             } else {
-            cy.log('Usuário não está logado');
-            return false;
+                cy.log('Usuário não está logado');
+                return false;
             }
         });
     }

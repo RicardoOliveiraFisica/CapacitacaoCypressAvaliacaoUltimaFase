@@ -1,6 +1,7 @@
 /// <reference types='cypress' />
 //import { before } from 'mocha'
 import Login from '../support/Pages/Login'
+import Home from '../support/Pages/Home'
 import CategoryProducts from '../support/Pages/CategoryProducts'
 import ViewCart from '../support/Pages/ViewCart'
 import Checkout from '../support/Pages/Checkout'
@@ -13,40 +14,45 @@ describe('Realizar Compra', function(){
       return false
     })
 
-    before(function(){
+    beforeEach(function(){
+
         cy.fixture('credenciaisFixture').then((dados)=>{
                 this.credenciaisExt = dados
+        }) 
+        
+        Home.acessarHome()
+        Home.verificarSeLogado().then((logado) => {
+                Login.acessarLogin()
+                cy.url().should('include', 'automationexercise')
+                if (!logado) {                                
+                        cy.realizarLogin(this.credenciaisExt.email.email_valido,
+                                this.credenciaisExt.passwords.password_valido)
+                }
+        })           
+
+              
+    })    
+
+    for (let compra=1; compra<4; compra++){
+        it(`Realizar Compra com sucesso de nº "${compra}"`, function(){    
+                CategoryProducts.selecionarCategoriaAleatoria()
+                CategoryProducts.clicarNoProdutoAleatorio()
+                CategoryProducts.verificarProdutoAdicionadoAoCarrinhoSucesso()
+                ViewCart.verificarCarrinhoSucesso()
+                ViewCart.clicarEmCheckout()
+                Checkout.verificarCheckoutSucesso()
+                Checkout.verificarCarrinhoNaoVazio()
+                Checkout.clicarEmCheckout()
+                Payment.preencherInfoCard(
+                        this.credenciaisExt.payment.card_name,
+                        this.credenciaisExt.payment.card_number,
+                        this.credenciaisExt.payment.card_cvv,
+                        this.credenciaisExt.payment.card_expiration_month,
+                        this.credenciaisExt.payment.card_expiration_year
+                )
+                Payment.clicarEmPagarEConfirmar()
+                Payment.verificarPagamentoSucesso()
         })
-            
-        Login.acessarLogin()
-        cy.url().should('include', 'automationexercise')
-
-    }) 
-
-    beforeEach(function(){
-            cy.realizarLogin(this.credenciaisExt.email.email_valido,
-                             this.credenciaisExt.passwords.password_valido)
-    })
-
-
-    it("Realizar Compra com sucesso", function(){
-        CategoryProducts.selecionarCategoriaAleatoria()
-        CategoryProducts.clicarNoProdutoAleatorio()
-        CategoryProducts.verificarProdutoAdicionadoAoCarrinhoSucesso()
-        ViewCart.verificarCarrinhoSucesso()
-        ViewCart.clicarEmCheckout()
-        Checkout.verificarCheckoutSucesso()
-        Checkout.verificarCarrinhoNaoVazio()
-        Checkout.clicarEmCheckout()
-        Payment.preencherInfoCard(
-                this.credenciaisExt.payment.card_name,
-                this.credenciaisExt.payment.card_number,
-                this.credenciaisExt.payment.card_cvv,
-                this.credenciaisExt.payment.card_expiration_month,
-                this.credenciaisExt.payment.card_expiration_year
-        )
-        Payment.clicarEmPagarEConfirmar()
-        Payment.verificarPagamentoSucesso()
-    })
+   }
 
 })

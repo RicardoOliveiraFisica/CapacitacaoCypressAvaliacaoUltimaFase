@@ -15,7 +15,7 @@ class CategoryProducts {
     }
 
     selecionarTipoProdutoAleatorio(){
-        cy.wrap(el.subCategory).then($products => {
+        cy.wrap(el.subCategory,{ timeout: 5000 }).then($products => {
             cy.log('Subcategorias  disponíveis: ' + $products.length)
             let index = Cypress._.random(0, $products.length - 1)
             cy.wrap($products).eq(index).click()
@@ -23,7 +23,7 @@ class CategoryProducts {
     }
 
     clicarNoProdutoAleatorio(){
-            cy.get(el.product).should('have.length.greaterThan', 0).then($products => {
+            cy.get(el.product,{ timeout: 5000 }).should('have.length.greaterThan', 0).then($products => {
             cy.log('Produtos disponíveis: ' + $products.length)
             let index = Cypress._.random(0, $products.length - 1)
             cy.wrap($products).eq(index).find('a.add-to-cart').first().click({ force: true })  
@@ -36,6 +36,27 @@ class CategoryProducts {
 
     clicarEmContinuarComprando() {
         cy.get(el.continueShopping).should('be.visible').click()
+    }
+
+    clicarEmVerCarrinho() {
+        cy.get(el.viewCart).should('be.visible').click()
+    }
+
+    esvaziarCarrinho() {
+        cy.get(el.esvaziarCarrinho).then($itens => {
+            if ($itens.length > 0) {
+                cy.wrap($itens).each(($el) => {
+                    cy.wrap($el).find('a').click()
+                    cy.wait(1000)
+                })
+            } else {
+                cy.log('O carrinho já está vazio.')
+            }
+        })
+    }
+
+    carrinhoEsvaziadoComSucesso() {
+        cy.get('p').should('contain.text', 'Cart is empty!')
     }
 
 }

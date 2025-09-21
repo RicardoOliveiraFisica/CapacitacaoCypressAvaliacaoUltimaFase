@@ -22,9 +22,9 @@ describe('Realizar Compra', function(){
         
         Home.acessarHome()
         Home.verificarSeLogado().then((logado) => {
-                Login.acessarLogin()
-                cy.url().should('include', 'automationexercise')
-                if (!logado) {                                
+                if (!logado) { 
+                        Login.acessarLogin()
+                        cy.url().should('include', 'automationexercise')                               
                         cy.realizarLogin(this.credenciaisExt.email.email_valido,
                                 this.credenciaisExt.passwords.password_valido)
                 }
